@@ -3,8 +3,8 @@
         "goalDate": false,
         "timezoneCity": false,
         "timezoneUTC": -7,
-        "doctorEXP": 0,
-        "doctorLevel": 0,
+        "doctorCurrentEXP": 0,
+        "doctorLevelUpEXP": 0,
         "dailySanityConsumption": 0,
         "monthlyCardDaysLeft": 0,
         "currentSanity": 0,
@@ -20,7 +20,6 @@
         "highestAutoSK": 5
     },
     "pulls": {
-
         "currentOrundum": 0,
         "goalOrundum": 0,
         "goalPull": 0,
