@@ -36,10 +36,12 @@ console.log("Welcome to the Arknights Currency Calculator! \n")
 if (data.optional.timezoneCity) { //"America/Vancouver"
     console.log(data.optional.timezoneCity + ' local time: '+ (new Date(localUTC).toLocaleDateString("en-US", timeFormat)))
 } else {
-    console.log("UTC" + data.optional.timezoneUTC + ": " + localUTC.toLocaleDateString("en-US", timeFormat));
+    if (data.optional.timezoneUTC != -7) {
+        console.log("UTC" + data.optional.timezoneUTC + ": " + localUTC.toLocaleDateString("en-US", timeFormat));
+    }
 }
-console.log("UTCMinus7: " + UTCMinus7)
-console.log("Local hours offset: " + localOffset)
+console.log("UTC-7: " + UTCMinus7.toLocaleDateString("en-US", timeFormat))
+console.log("Local hour(s) offset: " + localOffset)
 console.log("Time until next day: " + Math.floor(timeDiffHours) + " hours, " + timeDiffMinutes + " minutes and " + timeDiffSeconds + " seconds.");
 
 var localResetMessage = "The day will reset on " + localNextDayReset.toLocaleDateString("en-US", timeFormat)

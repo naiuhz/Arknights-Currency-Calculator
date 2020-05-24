@@ -1,14 +1,14 @@
 {
     "optional": {
         "goalDate": false,
-        "timezoneCity": "America/Toronto",
-        "timezoneUTC": -4,
+        "timezoneCity": false,
+        "timezoneUTC": -7,
         "doctorEXP": 0,
         "doctorLevel": 0,
         "dailySanityConsumption": 0,
         "monthlyCardDaysLeft": 0,
-        "currentSanity": 54,
-        "sanityCap": 127,
+        "currentSanity": 0,
+        "sanityCap": 0,
         "dailyMissionsCompleted": true,
         "weeklyMissionsCompleted": true,
         "signinRewardDay": 0,
@@ -20,6 +20,7 @@
         "highestAutoSK": 5
     },
     "pulls": {
+
         "currentOrundum": 0,
         "goalOrundum": 0,
         "goalPull": 0,
