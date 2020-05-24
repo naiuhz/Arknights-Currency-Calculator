@@ -1,0 +1,67 @@
+(json format)
+Ask for goals 
+- SV, LMD, EXP, Orundum, Pulls
+
+Ask if they have a deadline goal: (optional)
+- eg. by May 29th, 2020
+
+Ask for current inventory: 
+- SV, LMD, EXP, Orundum, sanity, sanity cap
+
+Ask for timezone (optional)
+- UTC
+
+Ask for estimated base output (optional)
+- LMD, EXP
+
+If Orundum or Pulls is a goal, ask for Weekly Annihilation limit
+
+Ask if completed daily/weekly missions 
+- if not, ask if related goal missions have been completed
+
+Ask for exp and level (optional)
+- eg. lvl: 45, exp: 56
+
+Ask for daily consumption of sanity potions (optional)
+- eg. 60 from emergency sanity potion
+
+Ask if your signin reward day is different from the calender (optional)
+- eg. I am on the 19th when today is the 20th
+
+Ask if any special event is happening (optional)
+- eg. full week access
+
+Ask for highest map level for farming (optional)
+
+Calculate:
+- today's date and time
+- when to have zero sanity to carry over to tomorrow
+- when to set an alarm to start consuming sanity the next day
+- 
+
+Tips:
+- Videos for completing Annihilation 1-3 if Orundum/Pulls goal
+- Tips on completing daily and weekly missions without consuming sanity if missions are incomplete
+- Advice on not farming Orundum too early on
+- If common materials one of the goals, try buying them in the friend shop in the next few days
+- take account for whales
+
+Enter custom map with drop rate and sanity values
+- Map name (optional)
+- sanity cost (optional)
+- exp (optional)
+- LMD (optional sanity cost drop rate)
+- material (sanity cost drop rate)
+
+Lvl:
+- 45: 7200 EXP
+- 46: 7500 EXP
+
+TODO:
+- rolling statistics calculator
+    - 0.99^69=0.5
+    - log_0.99 (0.5) = 69
+    - == log(0.5)/log(0.99) = ceil(68.968)
+- ASAP calculator
+- Priority list (Annihilation 3, story)
+- custom maps with drop rates
