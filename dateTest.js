@@ -37,7 +37,12 @@ if (data.optional.timezoneCity) { //"America/Vancouver"
     console.log(data.optional.timezoneCity + ' local time: '+ (new Date(localUTC).toLocaleDateString("en-US", timeFormat)))
 } else {
     if (data.optional.timezoneUTC != -7) {
-        console.log("UTC" + data.optional.timezoneUTC + ": " + localUTC.toLocaleDateString("en-US", timeFormat));
+        var UTCMessage = "UTC"
+        if (data.optional.timezoneUTC >= 0) {
+            UTCMessage += "+"
+        }
+        UTCMessage += data.optional.timezoneUTC + ": " + localUTC.toLocaleDateString("en-US", timeFormat)
+        console.log(UTCMessage);
     }
 }
 console.log("UTC-7: " + UTCMinus7.toLocaleDateString("en-US", timeFormat))
