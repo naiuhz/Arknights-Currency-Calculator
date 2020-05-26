@@ -16,33 +16,39 @@
         "highestAutoLS": 5,
         "highestAutoCE": 5,
         "highestAutoAP": 5,
-        "highestAutoSK": 5
+        "highestAutoSK": 5,
+        "completedWeeklyAnnihilation": false,
+        "annihilationSanityCost": 0
     },
     "pulls": {
         "currentOrundum": 0,
         "goalOrundum": 0,
         "goalPull": 0,
         "weeklyAnnihilationLimit": 1700,
+        "highestAnnihilationAuto": 2,
         "rarity": 6,
         "oddsPercentage": 50,
         "duplicates": 0
     },
-    "LMD": {
+    "lmd": {
         "goalLMD" : 0,
         "currentLMD" : 0,
         "baseOutputLMD": 0
     },
-    "EXP": {
+    "exp": {
         "goalOperatorEXP" : 0,
         "currentOperatorEXP" : 0,
         "baseOutputEXP": 0
     },
-    "SV": {
+    "sv": {
         "goalSV" : 0,
         "currentSV" : 0
     },
-    "Furniture": {
+    "furniture": {
         "goalFurnitureParts": 0,
-        "currentFurnitureParts": 0
+        "currentFurnitureParts": 0,
+        "carbonSticks": 0,
+        "carbonBricks": 0,
+        "carbonPacks": 0
     }
 }
