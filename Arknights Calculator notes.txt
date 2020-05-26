@@ -34,10 +34,11 @@ Ask if any special event is happening (optional)
 Ask for highest map level for farming (optional)
 
 Calculate:
-- today's date and time
-- when to have zero sanity to carry over to tomorrow
+X today's date and time
+X when to have zero sanity to carry over to tomorrow
 - when to set an alarm to start consuming sanity the next day
-- 
+- earliest date on efficiently accomplishing each goal
+- day by day schedule (consider Sundays)
 
 Tips:
 - Videos for completing Annihilation 1-3 if Orundum/Pulls goal
@@ -54,8 +55,9 @@ Enter custom map with drop rate and sanity values
 - material (sanity cost drop rate)
 
 Lvl:
-- 45: 7200 EXP
-- 46: 7500 EXP
+- 45: 7200  EXP
+- 46: 7500  EXP
+- 72: 23000 EXP
 
 TODO:
 - rolling statistics calculator
