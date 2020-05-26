@@ -1,0 +1,41 @@
+{
+    "daily": {
+        "lmd": 3500,
+        "exp": "8Green, 5B",
+        "furnitureParts": "72 parts = 3 sticks + 60 parts"
+    },
+    "weekly": {
+        "lmd": 13000,
+        "exp": "4Gold, 4Yellow, 4Green, 4Blue",
+        "furnitureParts": "250 parts"
+    },
+    "monthly":
+    {
+        "1": "2000 LMD",
+        "2": "10 green exp",
+        "4": "8 SV",
+        "5": "5 carbon sticks",
+        "6": "5 skill summaries",
+        "8": "4000 LMD",
+        "9": "10 blue exp",
+        "12": "40 FP",
+        "13": "10 skill summaries",
+        "15": "6000 LMD",
+        "16": "6 yellow exp",
+        "17": "1 PULL",
+        "18": "18 SV",
+        "19": "6 carbon bricks",
+        "20": "5 Skill summaries 2",
+        "22": "6000 LMD",
+        "23": "4 gold exp",
+        "26": "100 FP",
+        "27": "6 skill summary 3",
+        "28": "1 CHIP_CATALYST" ,
+        "29": "6000 LMD",
+        "30": "5 gold exp"
+    },
+    "base":{
+        "exp": 0,
+        "lmd": 0
+    }
+}
