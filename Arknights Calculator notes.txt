@@ -39,6 +39,7 @@ X when to have zero sanity to carry over to tomorrow
 - when to set an alarm to start consuming sanity the next day
 - earliest date on efficiently accomplishing each goal
 - day by day schedule (consider Sundays)
+- add to consideration sanity potions in total
 
 Tips:
 - Videos for completing Annihilation 1-3 if Orundum/Pulls goal
