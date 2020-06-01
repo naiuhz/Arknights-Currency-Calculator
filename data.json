@@ -19,7 +19,8 @@
         "highestAutoAP": 5,
         "highestAutoSK": 5,
         "completedWeeklyAnnihilation": false,
-        "annihilationSanityCost": 0
+        "annihilationSanityCost": 0,
+        "certificateStoreRefreshDate": "2020-06-01"
     },
     "pulls": {
         "currentOrundum": 0,
@@ -29,17 +30,22 @@
         "highestAnnihilationAuto": 2,
         "rarity": 6,
         "oddsPercentage": 50,
-        "duplicates": 0
+        "duplicates": 0,
+        "headhuntingStoreRemaining": 2,
+        "orundumStoreRemaining": 6
+
     },
     "lmd": {
         "goalLMD" : 0,
         "currentLMD" : 0,
-        "baseOutputLMD": 0
+        "baseOutputLMD": 0,
+        "storeRemaining": 15
     },
     "exp": {
         "goalOperatorEXP" : 0,
         "currentOperatorEXP" : 0,
-        "baseOutputEXP": 0
+        "baseOutputEXP": 0,
+        "storeRemaining": 15
     },
     "sv": {
         "goalSV" : 0,
@@ -51,6 +57,7 @@
         "carbonSticks": 0,
         "carbonBricks": 0,
         "carbonPacks": 0,
-        "goalDate": "2020-06-17"
+        "goalDate": "2020-06-17",
+        "storeRemaining": 5
     }
 }
