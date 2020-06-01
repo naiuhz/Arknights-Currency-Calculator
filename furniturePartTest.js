@@ -20,14 +20,26 @@ var UTCMinus7Weekday
 
 //var nextMonday = (d.getDate() + ((7-d.getDay())%7+1) % 7);
 if (UTCMinus7 >= 4) {
-    console.log("Today is " + UTCMinus7.getDay())
     UTCMinus7Weekday = UTCMinus7.getDay()
+    if (UTCMinus7Weekday == 0){
+        UTCMinus7Weekday = 7
+    }
+    console.log("Today is " + UTCMinus7Weekday)
 } else {
-    console.log("Today is " + UTCMinus7.getDay() - 1)
     UTCMinus7Weekday = UTCMinus7.getDay() - 1
+    console.log("Today is " + UTCMinus7Weekday)
 }
 
 var nextMonday //todo
+
+//if Math.ceil(timeDiffDays/7) < 1 and furniturePartGoalDate.getDay() > UTCMinus7.getDay()
+//then 0 weeks
+
+//if Math.ceil(timeDiffDays/7) < 1 and furniturePartGoalDate.getDay() < UTCMinus7.getDay()
+//then 1 week
+
+//if Math.ceil(timeDiffDays/7) > 1 and furniturePartGoalDate.getDay() > UTCMinus7.getDay()
+//then Math.ceil(timeDiffDays/7) weeks
 
 /*
 if (currentTime.getDay() == 1 && currentTime.getUTCHours >= 4) {
@@ -43,4 +55,4 @@ console.log("Your furniture part goal date2 is: " + furniturePartGoalDate)
 console.log("You have " + timeDiffDays + " days, " + timeDiffHours +" hours and " + timeDiffMinutes + " minutes to reach your goal.")
 
 console.log("Calculation: That's " + weekdays + " weekdays and " + weeks + " weeks.")
-console.log("Calculation: Next Monday is: " + nextMonday)
+//console.log("Calculation: Next Monday is: " + nextMonday)
