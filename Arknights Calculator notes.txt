@@ -37,6 +37,7 @@ Calculate:
 X today's date and time
 X when to have zero sanity to carry over to tomorrow
 - when to set an alarm to start consuming sanity the next day
+- when sanity overflows the current/next day
 - earliest date on efficiently accomplishing each goal
 - day by day schedule (consider Sundays)
 - add to consideration sanity potions in total
@@ -47,6 +48,7 @@ Tips:
 - Advice on not farming Orundum too early on
 - If common materials one of the goals, try buying them in the friend shop in the next few days
 - take account for whales
+- producing a dual chip for the first time rewards a dual chip from the campaign missions
 
 Enter custom map with drop rate and sanity values
 - Map name (optional)
@@ -61,10 +63,11 @@ Lvl:
 - 72: 23000 EXP
 
 TODO:
+- LMD/SV calculator > pull calculator > furniture calculator
 - rolling statistics calculator
     - 0.99^69=0.5
     - log_0.99 (0.5) = 69
     - == log(0.5)/log(0.99) = ceil(68.968)
 - ASAP calculator
-- Priority list (Annihilation 3, story)
+- Progress Priority list (Annihilation 3, story)
 - custom maps with drop rates
