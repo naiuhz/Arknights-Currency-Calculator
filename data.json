@@ -12,15 +12,15 @@
         "dailyMissionsCompleted": true,
         "weeklyMissionsCompleted": true,
         "signinRewardDay": 0,
-        "fullWeekAccessStart": "2020-05-20",
-        "fullWeekAccessEnd": "2020-06-03",
+        "fullWeekAccessStart": "2020 May 20",
+        "fullWeekAccessEnd": "2020 June 3",
         "highestAutoLS": 5,
         "highestAutoCE": 5,
         "highestAutoAP": 5,
         "highestAutoSK": 5,
         "completedWeeklyAnnihilation": false,
         "annihilationSanityCost": 0,
-        "certificateStoreRefreshDate": "2020-06-01"
+        "certificateStoreRefreshDate": "2020 June 1"
     },
     "pulls": {
         "currentOrundum": 0,
@@ -57,7 +57,7 @@
         "carbonSticks": 0,
         "carbonBricks": 0,
         "carbonPacks": 0,
-        "goalDate": "2020-06-17",
+        "goalDate": "2020 June 17",
         "storeRemaining": 5
     }
 }
