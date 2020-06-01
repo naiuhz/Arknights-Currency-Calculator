@@ -46,7 +46,7 @@
         "currentSV" : 0
     },
     "furniture": {
-        "goalFurnitureParts": 0,
+        "goalFurnitureParts": 3500,
         "currentFurnitureParts": 0,
         "carbonSticks": 0,
         "carbonBricks": 0,
