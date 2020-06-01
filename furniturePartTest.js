@@ -24,22 +24,15 @@ if (UTCMinus7 >= 4) {
     if (UTCMinus7Weekday == 0){
         UTCMinus7Weekday = 7
     }
-    console.log("Today is " + UTCMinus7Weekday)
+    //console.log("Today is " + UTCMinus7Weekday)
 } else {
     UTCMinus7Weekday = UTCMinus7.getDay() - 1
-    console.log("Today is " + UTCMinus7Weekday)
+    //console.log("Today is " + UTCMinus7Weekday)
 }
 
 var nextMonday //todo
 
-//if Math.ceil(timeDiffDays/7) < 1 and furniturePartGoalDate.getDay() > UTCMinus7.getDay()
-//then 0 weeks
 
-//if Math.ceil(timeDiffDays/7) < 1 and furniturePartGoalDate.getDay() < UTCMinus7.getDay()
-//then 1 week
-
-//if Math.ceil(timeDiffDays/7) > 1 and furniturePartGoalDate.getDay() > UTCMinus7.getDay()
-//then Math.ceil(timeDiffDays/7) weeks
 
 /*
 if (currentTime.getDay() == 1 && currentTime.getUTCHours >= 4) {
@@ -47,7 +40,7 @@ if (currentTime.getDay() == 1 && currentTime.getUTCHours >= 4) {
 } else {
     console.log("Today is " + UTCMinus7.getDay())
 }*/
-
+/*
 console.log("UTC-7: " + UTCMinus7.toLocaleDateString("en-US", timeFormat))
 console.log("Your furniture part goal is: " + furniturePartGoal)
 console.log("Your furniture part goal date is: " + furniturePartGoalDate.toLocaleDateString("en-US", timeFormat) + " in UTC-7")
@@ -56,3 +49,49 @@ console.log("You have " + timeDiffDays + " days, " + timeDiffHours +" hours and 
 
 console.log("Calculation: That's " + weekdays + " weekdays and " + weeks + " weeks.")
 //console.log("Calculation: Next Monday is: " + nextMonday)
+*/
+
+// assuming we exclude our own week
+const testCurrentDate = new Date("2020 June 8")
+const testGoalDate = new Date("2020 June 14")
+console.log("testCurrentDate: " + testCurrentDate.toLocaleDateString("en-US", timeFormat))
+console.log("testCurrentDate: " + testGoalDate.toLocaleDateString("en-US", timeFormat))
+
+const testTimeDiff = testGoalDate - testCurrentDate
+const testWeekdays = Math.floor(testTimeDiff/(1000 * 60 * 60 * 24))
+var testWeeks 
+
+testWeekday = testCurrentDate.getDay()
+if (testWeekday == 0){
+    testWeekday = 7
+}
+
+testGoalday = testGoalDate.getDay()
+if (testGoalday == 0){
+    testGoalday = 7
+}
+
+if (testGoalday > testWeekday){
+    console.log("Case A")
+    testWeeks = Math.floor(testWeekdays/7)
+}
+
+//if Math.ceil(timeDiffDays/7) < 1 and furniturePartGoalDate.getDay() < UTCMinus7.getDay()
+//then 1 week
+//current is Sun, goal is next Mon (8 days), weeks is then 2 (math.ceil?)
+
+/*else if (Math.ceil(testWeekdays/7) < 1 && (testGoalDate.getDay() < testWeekday)){
+    console.log("Case 2a")
+    testWeeks = 1
+}*/
+
+if (testGoalday <= testWeekday){
+    console.log("Case B")
+    testWeeks = Math.ceil(testWeekdays/7)
+}
+
+
+//if Math.ceil(timeDiffDays/7) > 1 and furniturePartGoalDate.getDay() > UTCMinus7.getDay()
+//then Math.ceil(timeDiffDays/7) weeks
+
+console.log("Calculation: That's " + testWeekdays + " weekday(s) and " + testWeeks + " week(s).")
