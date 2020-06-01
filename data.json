@@ -20,7 +20,8 @@
         "highestAutoSK": 5,
         "completedWeeklyAnnihilation": false,
         "annihilationSanityCost": 0,
-        "certificateStoreRefreshDate": "2020 June 1"
+        "certificateStoreRefreshDate": "2020 June 1",
+        "currentCommendationCertificate": 0
     },
     "pulls": {
         "currentOrundum": 0,
