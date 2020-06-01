@@ -37,5 +37,11 @@
     "base":{
         "exp": 0,
         "lmd": 0
+    },
+    "commendationsCertificateStore": {
+        "headhuntingPermit": 2,
+        "orundum": 600,
+        "lmd": 60000,
+        "recruitmentPermit": 15
     }
 }
