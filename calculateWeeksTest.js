@@ -15,11 +15,15 @@ var testWeeks
 testWeekday = testCurrentDate.getDay()
 if (testWeekday == 0){
     testWeekday = 7
+} else if (testWeekday == 1){
+    testWeekday = 8
 }
 
 testGoalday = testGoalDate.getDay()
 if (testGoalday == 0){
     testGoalday = 7
+} else if (testGoalday == 1){
+    testGoalday = 8
 }
 
 if (testGoalday > testWeekday){
