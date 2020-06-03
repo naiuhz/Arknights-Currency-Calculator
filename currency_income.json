@@ -2,12 +2,12 @@
     "daily": {
         "lmd": 3500,
         "exp": "8Green, 5B",
-        "furnitureParts": "72 parts = 3 sticks + 60 parts"
+        "furnitureParts": 72
     },
     "weekly": {
         "lmd": 13000,
         "exp": "4Gold, 4Yellow, 4Green, 4Blue",
-        "furnitureParts": "250 parts"
+        "furnitureParts": 250
     },
     "monthly":
     {
