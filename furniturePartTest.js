@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const data = require('./data.json')
+const income = require('./currency_income.json')
 const timeFormat = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }
 const furniturePartGoal = data.furniture.goalFurnitureParts
 const furniturePartGoalDate = new Date((new Date(data.furniture.goalDate)).setHours(4)) //data.furniture.goalDate
@@ -50,11 +51,11 @@ if (currentTime.getDay() == 1 && currentTime.getUTCHours >= 4) {
 
 console.log("UTC-7: " + UTCMinus7.toLocaleDateString("en-US", timeFormat))
 console.log("Your furniture part goal is: " + furniturePartGoal)
-console.log("Your furniture part goal date is: " + furniturePartGoalDate.toLocaleDateString("en-US", timeFormat) + " in UTC-7")
-console.log("Your furniture part goal date2 is: " + furniturePartGoalDate)
+console.log("Your furniture part goal date is: " + furniturePartGoalDate.toLocaleDateString("en-US", timeFormat))
 console.log("You have " + timeDiffDays + " days, " + timeDiffHours +" hours and " + timeDiffMinutes + " minutes to reach your goal.")
 
-console.log("Calculation: That's " + days + " days and " + weeks + " weeks.")
-//console.log("Calculation: Next Monday is: " + nextMonday)
+console.log("That's " + days + " days and " + weeks + " weeks.")
 
+// Calculate 
 
+console.log("Calculation: " + income.daily.furnitureParts + "*" + days + " (daily income) + " + income.weekly.furnitureParts + "*" + weeks + " (weekly income) + " + monthlySignin + " (monthly signin income)")
