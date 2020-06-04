@@ -1,12 +1,14 @@
 {
-    "daily": {
+    "daily": 
+    {
         "lmd": 3500,
-        "exp": "8Green, 5B",
+        "exp": 3600,
         "furnitureParts": 72
     },
-    "weekly": {
+    "weekly": 
+    {
         "lmd": 13000,
-        "exp": "4Gold, 4Yellow, 4Green, 4Blue",
+        "exp": 14400,
         "furnitureParts": 250
     },
     "monthly":
@@ -34,11 +36,13 @@
         "29": "6000 LMD",
         "30": "10000 EXP"
     },
-    "base":{
+    "base":
+    {
         "exp": 0,
         "lmd": 0
     },
-    "commendationsCertificateStore": {
+    "commendationsCertificateStore": 
+    {
         "headhuntingPermit": 2,
         "orundum": 600,
         "lmd": 60000,
