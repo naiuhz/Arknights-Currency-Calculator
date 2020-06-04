@@ -71,3 +71,12 @@ TODO:
 - ASAP calculator
 - Progress Priority list (Annihilation 3, story)
 - custom maps with drop rates
+
+Conversion rates:
+- 1 carbon stick : 4 furniture parts
+- 1 carbon brick : 8 furniture parts
+- 1 carbon pack : 12 furniture parts
+- 1 green record : 200 EXP
+- 1 blue record : 400 EXP
+- 1 yellow record : 1000 EXP
+- 1 gold record : 2000 EXP
