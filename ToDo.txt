@@ -1,5 +1,7 @@
 ToDo list: (Furniture Parts, LMD, EXP, SV)
-- Approximate completion time: date/hour/minute
+- change printed goal to local time
+- farm map on which days and number of times
+- approximate completion time: date/hour/minute
 - Estimated map completion times
 - Certificate store furniture parts
 - Level up sanity recharge
