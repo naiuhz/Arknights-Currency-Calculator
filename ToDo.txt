@@ -1,5 +1,6 @@
 ToDo list: (Furniture Parts, LMD, EXP, SV)
-- change printed goal to local time
+X change printed goal to local time
+- Scheduler
 - farm map on which days and number of times
 - approximate completion time: date/hour/minute
 - Estimated map completion times
