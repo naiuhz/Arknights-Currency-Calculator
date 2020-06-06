@@ -1,11 +1,17 @@
 ToDo list: (Furniture Parts, LMD, EXP, SV)
-X change printed goal to local time
 - Scheduler
-- farm map on which days and number of times
-- approximate completion time: date/hour/minute
-- Estimated map completion times
-- Certificate store furniture parts
-- Level up sanity recharge
+    - Need end of day milestones for farmable dates
+- Add certificate store furniture parts
+- Add level up sanity recharge notice
+
+Maybe list:
 - Earliest goal achievable date
-- Total sanity recovered and available per day
+    - Missing goal date, calculate currency sequentially day by day
+    - Requires sanity potions available
 - Possible bedtimes
+    - Requires current/wake up times?
+
+Done:
+- Change printed goal to local time
+- Farm map on which days and number of times
+
