@@ -21,7 +21,8 @@
         "completedWeeklyAnnihilation": false,
         "annihilationSanityCost": 0,
         "certificateStoreRefreshDate": "2020 June 1",
-        "currentCommendationCertificate": 0
+        "currentCommendationCertificate": 0,
+        "localBedTime": "12:00 AM"
     },
     "pulls": {
         "currentOrundum": 0,
