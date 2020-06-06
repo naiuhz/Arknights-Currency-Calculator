@@ -1,5 +1,6 @@
 ToDo list: (Furniture Parts, LMD, EXP, SV)
 - Scheduler
+    - Calculate non-farmable days and when to start recharging sanity to carry over
     - Need end of day milestones for farmable dates
 - Add certificate store furniture parts
 - Add level up sanity recharge notice
