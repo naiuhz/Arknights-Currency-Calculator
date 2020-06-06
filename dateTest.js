@@ -6,11 +6,14 @@ const timeFormat = { weekday: 'long', year: 'numeric', month: 'long', day: 'nume
 const currentTime = new Date()
 //const UTC = new Date(currentTime.getTime() + currentTime.getTimezoneOffset() * 60000)
 const UTCMinus7 = new Date (currentTime.getUTCFullYear(), currentTime.getUTCMonth(), currentTime.getUTCDate(), currentTime.getUTCHours() - 7, currentTime.getUTCMinutes(), currentTime.getUTCSeconds(), currentTime.getUTCMilliseconds())
+const UTCMinus7ResetHour = 4
 var UTCNextDay
-if (UTCMinus7.getHours() < 4){
-    UTCNextDay = new Date (currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), 4, 0, 0, 0)
+if (UTCMinus7.getHours() < UTCMinus7ResetHour){
+    //console.log("It's current between 12AM and 4AM in UTC-7: " + UTCMinus7.getHours())
+    UTCNextDay = new Date (UTCMinus7.getFullYear(), UTCMinus7.getMonth(), UTCMinus7.getDate(), UTCMinus7ResetHour, 0, 0, 0)
 } else {
-    UTCNextDay = new Date (currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate() + 1, 4, 0, 0, 0)
+    UTCNextDay = new Date (UTCMinus7.getFullYear(), UTCMinus7.getMonth(), UTCMinus7.getDate() + 1, UTCMinus7ResetHour, 0, 0, 0)
+
 }
 var localUTC
 if (data.optional.timezoneCity) {
@@ -25,10 +28,10 @@ const timeDiffSeconds = Math.floor(((timeDiff/(1000 * 60 * 60) - timeDiffHours)*
 const localOffset = Math.floor((UTCMinus7 - localUTC)/(1000 * 60 * 60))
 
 var localNextDayReset = localUTC
-if (currentTime.getHours() < (4 - localOffset)){
-    localNextDayReset = new Date (currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), (4 - localOffset), 0, 0, 0)
+if (UTCMinus7.getHours() < (UTCMinus7ResetHour - localOffset)){
+    localNextDayReset = new Date (currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), (UTCMinus7ResetHour - localOffset), 0, 0, 0)
 } else {
-    localNextDayReset = new Date (currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate() + 1, (4 - localOffset), 0, 0, 0)
+    localNextDayReset = new Date (currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate() + 1, (UTCMinus7ResetHour - localOffset), 0, 0, 0)
 }
 
 console.log("Welcome to the Arknights Currency Calculator! \n")
@@ -49,6 +52,7 @@ console.log("UTC-7: " + UTCMinus7.toLocaleDateString("en-US", timeFormat))
 console.log("Local hour(s) offset: " + localOffset)
 console.log("Time until next day: " + Math.floor(timeDiffHours) + " hours, " + timeDiffMinutes + " minutes and " + timeDiffSeconds + " seconds.");
 
+
 var localResetMessage = "The day will reset on " + localNextDayReset.toLocaleDateString("en-US", timeFormat)
 if (data.optional.timezoneCity) {
     localResetMessage += " in " + data.optional.timezoneCity + "."
@@ -62,7 +66,9 @@ if (data.optional.sanityCap) {
     const sanityRechargeMinutes = data.optional.sanityCap - (sanityRechargeHours*10)
     sanityRechargeTimeMilliseconds = (sanityRechargeHours * 1000 * 60 * 60) + (sanityRechargeMinutes * 1000 * 60 * 6)
     const startSanityRecharge = new Date (localNextDayReset.getTime() - sanityRechargeTimeMilliseconds)
-    console.log("If you wish to carry over today's sanity to tomorrow, have 0 sanity by local time: " + startSanityRecharge.toLocaleDateString("en-US", timeFormat))
+    if (localUTC < startSanityRecharge) {
+        console.log("If you wish to carry over today's sanity to tomorrow, have 0 sanity by local time: " + startSanityRecharge.toLocaleDateString("en-US", timeFormat))
+    }
     if (data.optional.currentSanity) {
         var excessSanity
         if (localUTC < startSanityRecharge){
