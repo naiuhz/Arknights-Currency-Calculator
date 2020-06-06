@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const data = require('./data.json')
+const sanityCap = data.optional.sanityCap
 const income = require('./currency_income.json')
 const constants = require('./constants.json')
 const skData = constants.map["SK-" + data.optional.highestAutoSK]
@@ -146,16 +147,6 @@ function calculateNumOfRuns() {
     return skRuns
 }
 
-// nextDay
-// Finds date of next weekday
-// Credit: NoelHunter from this post https://stackoverflow.com/a/27336600
-function nextDay(d, dow){
-
-    d.setDate(d.getDate() + (dow+(7-d.getDay())) % 7);
-    return d;
-}
-
-
 // scheduler
 // Calculates farmable dates and average runs per farmable day
 function scheduler(skRuns) {
@@ -163,6 +154,7 @@ function scheduler(skRuns) {
     console.log("--------------Scheduler-------------")
     const skWeekdays = constants.suppliesRotationWeekdays.SK
     var farmingDates = []
+    var saveSanityDates = []
     var farmingDays = 0
     var i = 0
     var iDate = localUTC
@@ -177,8 +169,18 @@ function scheduler(skRuns) {
             } else {
                 i = 0
             }
-            iDate = nextDay(iDate, skWeekdays[i])
+            iDate = new Date(iDate.setDate(iDate.getDate()+1))
         } else {
+            // Check if tomorrow is a farmable day and not the goal date
+            if (iDate.getDate() + 1 < localfurniturePartGoalDate.getDate()){
+                var tomorrowDay = iDay + 1
+                if (tomorrowDay == 7) {
+                    tomorrowDay = 0
+                }
+                if (skWeekdays.includes(tomorrowDay)) {
+                    saveSanityDates.push(new Date(iDate.valueOf()))
+                }
+            }
             iDate = new Date(iDate.setDate(iDate.getDate()+1))
         }
         iDay = iDate.getDay()
@@ -190,4 +192,36 @@ function scheduler(skRuns) {
     for (var iFarm = 0; iFarm < farmingDates.length; iFarm++){
         console.log("   - " + farmingDates[iFarm].toLocaleDateString("en-US", dateFormat))
     }
+
+
+
+    if (sanityCap) {
+        if (avgSKSanity >= 170) {
+            const sanitRechargeStartTime = calculateCarryOverSanity()
+            console.log("If short on sanity, carry over " + sanityCap + " sanity on the following non-farmable days to the next farmable day.")
+            // start recharging sanity on which off days and what time:
+            console.log("Start recharging from 0 sanity at these times: ")
+            for (var iSaveSanity = 0; iSaveSanity < saveSanityDates.length; iSaveSanity++){
+                // Credit for displaying hour and minutes: CJLopez & nrofis from https://stackoverflow.com/a/20430558
+                console.log("   - " + saveSanityDates[iSaveSanity].toLocaleDateString("en-US", dateFormat) + " at " + sanitRechargeStartTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}))
+            }
+        }
+    } else {
+        console.log("You might be low on sanity. Please fill in the value for sanityCap in data.json if you wish to know when to start recharging on non-farmable days.")
+    }
+
+}
+
+function calculateCarryOverSanity() {
+
+    const sanityRechargeHours = Math.floor(sanityCap/10)
+    const sanityRechargeMinutes = sanityCap - (sanityRechargeHours*10)
+    sanityRechargeTimeMilliseconds = (sanityRechargeHours * 1000 * 60 * 60) + (sanityRechargeMinutes * 1000 * 60 * 6)
+    var localNextDayReset = localUTC
+    if (UTCMinus7.getHours() < (UTCMinus7ResetHour - localOffset)){
+        localNextDayReset = new Date (currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), (UTCMinus7ResetHour - localOffset), 0, 0, 0)
+    } else {
+        localNextDayReset = new Date (currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate() + 1, (UTCMinus7ResetHour - localOffset), 0, 0, 0)
+    }
+    return new Date (localNextDayReset.getTime() - sanityRechargeTimeMilliseconds)
 }
