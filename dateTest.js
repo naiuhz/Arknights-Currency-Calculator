@@ -7,12 +7,12 @@ const currentTime = new Date()
 //const UTC = new Date(currentTime.getTime() + currentTime.getTimezoneOffset() * 60000)
 const UTCMinus7 = new Date (currentTime.getUTCFullYear(), currentTime.getUTCMonth(), currentTime.getUTCDate(), currentTime.getUTCHours() - 7, currentTime.getUTCMinutes(), currentTime.getUTCSeconds(), currentTime.getUTCMilliseconds())
 const UTCMinus7ResetHour = 4
-var UTCNextDay
+var UTCMinus7NextDay
 if (UTCMinus7.getHours() < UTCMinus7ResetHour){
     //console.log("It's current between 12AM and 4AM in UTC-7: " + UTCMinus7.getHours())
-    UTCNextDay = new Date (UTCMinus7.getFullYear(), UTCMinus7.getMonth(), UTCMinus7.getDate(), UTCMinus7ResetHour, 0, 0, 0)
+    UTCMinus7NextDay = new Date (UTCMinus7.getFullYear(), UTCMinus7.getMonth(), UTCMinus7.getDate(), UTCMinus7ResetHour, 0, 0, 0)
 } else {
-    UTCNextDay = new Date (UTCMinus7.getFullYear(), UTCMinus7.getMonth(), UTCMinus7.getDate() + 1, UTCMinus7ResetHour, 0, 0, 0)
+    UTCMinus7NextDay = new Date (UTCMinus7.getFullYear(), UTCMinus7.getMonth(), UTCMinus7.getDate() + 1, UTCMinus7ResetHour, 0, 0, 0)
 
 }
 var localUTC
@@ -21,7 +21,7 @@ if (data.optional.timezoneCity) {
 } else {
     localUTC = new Date (currentTime.getUTCFullYear(), currentTime.getUTCMonth(), currentTime.getUTCDate(), currentTime.getUTCHours() + data.optional.timezoneUTC, currentTime.getUTCMinutes(), currentTime.getUTCSeconds(), currentTime.getUTCMilliseconds())
 }
-const timeDiff = UTCNextDay - UTCMinus7
+const timeDiff = UTCMinus7NextDay - UTCMinus7
 const timeDiffHours = Math.floor(timeDiff/(1000 * 60 * 60))
 const timeDiffMinutes = Math.floor((timeDiff/(1000 * 60 * 60) - timeDiffHours)*60)
 const timeDiffSeconds = Math.floor(((timeDiff/(1000 * 60 * 60) - timeDiffHours)*60 - timeDiffMinutes)*60)
