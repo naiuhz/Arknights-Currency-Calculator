@@ -1,0 +1,8 @@
+ToDo list: (Furniture Parts, LMD, EXP, SV)
+- Approximate completion time: date/hour/minute
+- Estimated map completion times
+- Certificate store furniture parts
+- Level up sanity recharge
+- Earliest goal achievable date
+- Total sanity recovered and available per day
+- Possible bedtimes
