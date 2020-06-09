@@ -1,53 +1,48 @@
 {
-    "daily": 
-    {
-        "lmd": 3500,
-        "exp": 3600,
-        "furnitureParts": 72
-    },
-    "weekly": 
-    {
-        "lmd": 13000,
-        "exp": 14400,
-        "furnitureParts": 250
-    },
-    "monthly":
-    {
-        "1": "2000 LMD",
-        "2": "2000‬ EXP",
-        "4": "8 SHOP_VOUCHERS",
-        "5": "20 FURNITURE_PARTS",
-        "6": "5 SKILL_SUMMARIES_1",
-        "8": "4000 LMD",
-        "9": "4000 EXP",
-        "12": "40 FURNITURE_PARTS",
-        "13": "10 SKILL_SUMMARIES_1",
-        "15": "6000 LMD",
-        "16": "6000 EXP",
-        "17": "1 PULL",
-        "18": "18 SHOP_VOUCHERS",
-        "19": "48 FURNITURE_PARTS",
-        "20": "5 SKILL_SUMMARIES_2",
-        "22": "6000 LMD",
-        "23": "8000 EXP",
-        "26": "100 FURNITURE_PARTS",
-        "27": "6 SKILL_SUMMARIES_3",
-        "28": "1 CHIP_CATALYST" ,
-        "29": "6000 LMD",
-        "30": "10000 EXP"
-    },
-    "base":
-    {
-        "exp": 0,
-        "lmd": 0
-    },
-    "commendationsCertificateStore": 
-    {
-        "headhuntingPermit": 2,
-        "orundum": 600,
-        "lmd": 60000,
-        "recruitmentPermit": 15,
-        "furnitureParts": 500,
-        "exp": 60000
-    }
+  "daily": {
+    "lmd": 3500,
+    "exp": 3600,
+    "furnitureParts": 72
+  },
+  "weekly": {
+    "lmd": 13000,
+    "exp": 14400,
+    "furnitureParts": 250
+  },
+  "monthly": {
+    "1": [2000, "LMD"],
+    "2": "2000‬ EXP",
+    "4": "8 SHOP_VOUCHERS",
+    "5": "20 FURNITURE_PARTS",
+    "6": "5 SKILL_SUMMARIES_1",
+    "8": "4000 LMD",
+    "9": "4000 EXP",
+    "12": "40 FURNITURE_PARTS",
+    "13": "10 SKILL_SUMMARIES_1",
+    "15": "6000 LMD",
+    "16": "6000 EXP",
+    "17": "1 PULL",
+    "18": "18 SHOP_VOUCHERS",
+    "19": "48 FURNITURE_PARTS",
+    "20": "5 SKILL_SUMMARIES_2",
+    "22": "6000 LMD",
+    "23": "8000 EXP",
+    "26": "100 FURNITURE_PARTS",
+    "27": "6 SKILL_SUMMARIES_3",
+    "28": "1 CHIP_CATALYST",
+    "29": "6000 LMD",
+    "30": "10000 EXP"
+  },
+  "base": {
+    "exp": 0,
+    "lmd": 0
+  },
+  "commendationsCertificateStore": {
+    "headhuntingPermit": 2,
+    "orundum": 600,
+    "lmd": 60000,
+    "recruitmentPermit": 15,
+    "furnitureParts": 500,
+    "exp": 60000
+  }
 }
