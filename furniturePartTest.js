@@ -1,28 +1,30 @@
 #!/usr/bin/env node
 
-const data = require("./data.json");
-const sanityCap = data.optional.sanityCap;
-const income = require("./currency_income.json");
-const constants = require("./constants.json");
-const skData = constants.map["SK-" + data.optional.highestAutoSK];
+const data = require('./data.json');
+
+const { sanityCap } = data.optional;
+const income = require('./currency_income.json');
+const constants = require('./constants.json');
+
+const skData = constants.map[`SK-${data.optional.highestAutoSK}`];
 const timeFormat = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
   hour12: true,
 };
 const dateFormat = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
 };
 const furniturePartGoalDate = new Date(
-  new Date(data.furniture.goalDate).setHours(4)
-); //data.furniture.goalDate
+  new Date(data.furniture.goalDate).setHours(4),
+); // data.furniture.goalDate
 const currentTime = new Date();
 const UTCMinus7 = new Date(
   currentTime.getUTCFullYear(),
@@ -31,15 +33,15 @@ const UTCMinus7 = new Date(
   currentTime.getUTCHours() - 7,
   currentTime.getUTCMinutes(),
   currentTime.getUTCSeconds(),
-  currentTime.getUTCMilliseconds()
+  currentTime.getUTCMilliseconds(),
 );
 const UTCMinus7ResetHour = 4;
 let localUTC;
 if (data.optional.timezoneCity) {
   localUTC = new Date(
-    currentTime.toLocaleString("en-US", {
+    currentTime.toLocaleString('en-US', {
       timeZone: data.optional.timezoneCity,
-    })
+    }),
   ); // Default
 } else {
   localUTC = new Date(
@@ -49,7 +51,7 @@ if (data.optional.timezoneCity) {
     currentTime.getUTCHours() + data.optional.timezoneUTC,
     currentTime.getUTCMinutes(),
     currentTime.getUTCSeconds(),
-    currentTime.getUTCMilliseconds()
+    currentTime.getUTCMilliseconds(),
   );
 }
 const localOffset = Math.floor((UTCMinus7 - localUTC) / (1000 * 60 * 60));
@@ -62,7 +64,7 @@ if (UTCMinus7.getHours() < UTCMinus7ResetHour - localOffset) {
     UTCMinus7ResetHour - localOffset,
     0,
     0,
-    0
+    0,
   );
 } else {
   localNextDayReset = new Date(
@@ -72,26 +74,40 @@ if (UTCMinus7.getHours() < UTCMinus7ResetHour - localOffset) {
     UTCMinus7ResetHour - localOffset,
     0,
     0,
-    0
+    0,
   );
 }
 const localFurniturePartGoalDate = new Date(
-  furniturePartGoalDate.setHours(UTCMinus7ResetHour - localOffset)
+  furniturePartGoalDate.setHours(UTCMinus7ResetHour - localOffset),
 );
 const timeDiff = furniturePartGoalDate - localUTC;
 const timeDiffDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 const timeDiffHours = Math.floor(timeDiff / (1000 * 60 * 60)) % 24;
 const timeDiffMinutes = Math.floor(timeDiff / (1000 * 60)) % 60;
-
-// Main
-// Calculates optimal number of runs on farming maps including calculations of
-// daily, weekly and monthly income
 let weeks = 0;
-calculateDaysAndWeeks();
-const furniturePartFarm = data.furniture.goalFurnitureParts - calculateIncome();
-if (furniturePartFarm >= 0) {
-  const skRuns = calculateNumOfRuns();
-  scheduler(skRuns);
+
+// printLocalTime
+// Prints local time
+function printLocalTime() {
+  console.log(`UTC-7: ${UTCMinus7.toLocaleDateString('en-US', timeFormat)}`);
+  if (data.optional.timezoneCity) {
+    // "America/Vancouver"
+    console.log(
+      `${data.optional.timezoneCity} local time: ${new Date(
+        localUTC,
+      ).toLocaleDateString('en-US', timeFormat)}`,
+    );
+  } else if (data.optional.timezoneUTC !== -7) {
+    let UTCMessage = 'UTC';
+    if (data.optional.timezoneUTC >= 0) {
+      UTCMessage += '+';
+    }
+    UTCMessage += `${data.optional.timezoneUTC}: ${localUTC.toLocaleDateString(
+      'en-US',
+      timeFormat,
+    )}`;
+    console.log(UTCMessage);
+  }
 }
 
 // calculateDaysAndWeeks
@@ -106,10 +122,10 @@ function calculateDaysAndWeeks() {
     UTCMinus7Weekday = UTCMinus7.getDay() - 1;
   }
   // furniturePartGoalDate is always at 4AM so you don't have to check if the hour is earlier than 4AM
-  if (UTCMinus7Weekday == 0) {
+  if (UTCMinus7Weekday === 0) {
     UTCMinus7Weekday = 7;
   }
-  if (furniturePartGoalWeekday == 0) {
+  if (furniturePartGoalWeekday === 0) {
     furniturePartGoalWeekday = 7;
   }
   if (furniturePartGoalWeekday > UTCMinus7Weekday) {
@@ -120,84 +136,45 @@ function calculateDaysAndWeeks() {
   }
   printLocalTime();
 
-  //console.log("You have " + timeDiffDays + " days, " + timeDiffHours +" hours and " + timeDiffMinutes + " minutes to reach your goal. That's a total of " + timeDiffDays + " days and " + weeks + " weeks.")
-}
-
-// printLocalTime
-// Prints local time
-function printLocalTime() {
-  console.log("UTC-7: " + UTCMinus7.toLocaleDateString("en-US", timeFormat));
-  if (data.optional.timezoneCity) {
-    //"America/Vancouver"
-    console.log(
-      data.optional.timezoneCity +
-        " local time: " +
-        new Date(localUTC).toLocaleDateString("en-US", timeFormat)
-    );
-  } else {
-    if (data.optional.timezoneUTC != -7) {
-      let UTCMessage = "UTC";
-      if (data.optional.timezoneUTC >= 0) {
-        UTCMessage += "+";
-      }
-      UTCMessage +=
-        data.optional.timezoneUTC +
-        ": " +
-        localUTC.toLocaleDateString("en-US", timeFormat);
-      console.log(UTCMessage);
-    }
-  }
+  // console.log("You have " + timeDiffDays + " days, " + timeDiffHours +" hours and " + timeDiffMinutes + " minutes to reach your goal. That's a total of " + timeDiffDays + " days and " + weeks + " weeks.")
 }
 
 // calculateIncome
 // Calculates relevant daily, weekly and monthly signin rewards
 function calculateIncome() {
-  let monthlySigninFurniturePartIncome = 0;
-  let monthlySigninFurniturePartCalculation = "";
-
-  if (data.optional.signinRewardDay) {
-    i = data.optional.signinRewardDay;
+  let monthlySignInFurniturePartIncome = 0;
+  let monthlySignInFurniturePartCalculation = '';
+  let iDay;
+  if (data.optional.signInRewardDay) {
+    iDay = data.optional.signInRewardDay;
+  } else {
+    iDay = localNextDayReset.getDate();
   }
-  for (
-    let i = localNextDayReset.getDate();
-    i < furniturePartGoalDate.getDate();
-    i++
-  ) {
-    if (i in income.monthly) {
-      const signinReward = income.monthly[i].split(" ");
-      const rewardQuantity = signinReward[0];
-      const rewardType = signinReward[1];
-      if (rewardType == "FURNITURE_PARTS") {
-        monthlySigninFurniturePartCalculation += rewardQuantity + "+";
-        monthlySigninFurniturePartIncome += parseInt(rewardQuantity);
+
+  for (; iDay < furniturePartGoalDate.getDate(); iDay += 1) {
+    if (iDay in income.monthly) {
+      const signInReward = income.monthly[iDay].split(' ');
+      const rewardQuantity = signInReward[0];
+      const rewardType = signInReward[1];
+      if (rewardType === 'FURNITURE_PARTS') {
+        monthlySignInFurniturePartCalculation += `${rewardQuantity}+`;
+        monthlySignInFurniturePartIncome += parseInt(rewardQuantity, 10);
       }
     }
   }
-  monthlySigninFurniturePartCalculation = monthlySigninFurniturePartCalculation.substring(
+  monthlySignInFurniturePartCalculation = monthlySignInFurniturePartCalculation.substring(
     0,
-    monthlySigninFurniturePartCalculation.length - 1
+    monthlySignInFurniturePartCalculation.length - 1,
   );
   console.log(
-    "Income calculation: " +
-      income.daily.furnitureParts +
-      "*" +
-      timeDiffDays +
-      " (daily income) + " +
-      income.weekly.furnitureParts +
-      "*" +
-      weeks +
-      " (weekly income) + " +
-      monthlySigninFurniturePartCalculation +
-      " (monthly signin income)"
+    `Income calculation: ${income.daily.furnitureParts}*${timeDiffDays} (daily income) + ${income.weekly.furnitureParts}*${weeks} (weekly income) + ${monthlySignInFurniturePartCalculation} (monthly signin income)`,
   );
   const totalFurniturePartIncome =
     income.daily.furnitureParts * timeDiffDays +
     income.weekly.furnitureParts * weeks +
-    monthlySigninFurniturePartIncome;
+    monthlySignInFurniturePartIncome;
   console.log(
-    "Total furniture part income: " +
-      totalFurniturePartIncome +
-      " furniture parts."
+    `Total furniture part income: ${totalFurniturePartIncome} furniture parts.`,
   );
 
   return totalFurniturePartIncome - data.furniture.currentFurnitureParts;
@@ -205,54 +182,57 @@ function calculateIncome() {
 
 // calculateNumOfRuns
 // Calculates maximum number of runs needed to farm a currency and achieve the goal by goal date
-function calculateNumOfRuns() {
-  console.log("--------------Calculate_Number_of_Runs-------------");
-  const skRunFP = parseInt(skData.furnitureParts);
+function calculateNumOfRuns(furniturePartFarm) {
+  console.log('--------------Calculate_Number_of_Runs-------------');
+  const skRunFP = parseInt(skData.furnitureParts, 10);
   const skRuns = Math.ceil(furniturePartFarm / skRunFP);
-  const skSanity = skRuns * parseInt(skData.sanity);
-  let furniturePartFarmMessage =
-    "You need to farm SK-" +
-    data.optional.highestAutoSK +
-    " at least " +
-    skRuns +
-    " times (" +
-    skSanity +
-    " sanity) within the next ";
+  const skSanity = skRuns * parseInt(skData.sanity, 10);
+  let furniturePartFarmMessage = `You need to farm SK-${data.optional.highestAutoSK} at least ${skRuns} times (${skSanity} sanity) within the next `;
 
   if (timeDiffDays) {
-    furniturePartFarmMessage += timeDiffDays + " day(s)";
+    furniturePartFarmMessage += `${timeDiffDays} day(s)`;
     if (timeDiffMinutes) {
-      furniturePartFarmMessage += ", ";
+      furniturePartFarmMessage += ', ';
     } else {
-      furniturePartFarmMessage += " and ";
+      furniturePartFarmMessage += ' and ';
     }
   }
   if (timeDiffHours) {
-    furniturePartFarmMessage += timeDiffHours + " hour(s)";
+    furniturePartFarmMessage += `${timeDiffHours} hour(s)`;
   }
   if (timeDiffMinutes) {
-    furniturePartFarmMessage += " and ";
-    furniturePartFarmMessage += timeDiffMinutes + " minute(s)";
+    furniturePartFarmMessage += ' and ';
+    furniturePartFarmMessage += `${timeDiffMinutes} minute(s)`;
   }
-  furniturePartFarmMessage +=
-    " before " +
-    localFurniturePartGoalDate.toLocaleDateString("en-US", timeFormat) +
-    ".";
+  furniturePartFarmMessage += ` before ${localFurniturePartGoalDate.toLocaleDateString(
+    'en-US',
+    timeFormat,
+  )}.`;
   console.log(furniturePartFarmMessage);
 
   return skRuns;
 }
 
+function calculateCarryOverSanity() {
+  const sanityRechargeHours = Math.floor(sanityCap / 10);
+  const sanityRechargeMinutes = sanityCap - sanityRechargeHours * 10;
+  const sanityRechargeTimeMilliseconds =
+    sanityRechargeHours * 1000 * 60 * 60 +
+    sanityRechargeMinutes * 1000 * 60 * 6;
+
+  return new Date(localNextDayReset.getTime() - sanityRechargeTimeMilliseconds);
+}
+
 // scheduler
 // Calculates farmable dates and average runs per farmable day
 function scheduler(skRuns) {
-  console.log("--------------Scheduler-------------");
+  console.log('--------------Scheduler-------------');
   const skWeekdays = constants.suppliesRotationWeekdays.SK;
-  let farmingDates = [];
-  let farmingDatesCumulativeFurnitureParts = [];
+  const farmingDates = [];
+  const farmingDatesCumulativeFurnitureParts = [];
   let cumulativeFurnitureParts = data.furniture.currentFurnitureParts;
-  let remainingSKRuns = skRuns;
-  let saveSanityDates = [];
+  // const remainingSKRuns = skRuns;
+  const saveSanityDates = [];
   let farmingDays = 0;
 
   let iDate = localNextDayReset;
@@ -262,67 +242,60 @@ function scheduler(skRuns) {
     iDate.getDate() < localFurniturePartGoalDate.getDate();
 
   ) {
-    //if new week, add weekly income
-    if (iDay == 1) {
+    // if new week, add weekly income
+    if (iDay === 1) {
       cumulativeFurnitureParts += 250;
     }
     cumulativeFurnitureParts += 72;
     if (iDate.getDate() in income.monthly) {
-      const signinReward = income.monthly[iDate.getDate()].split(" ");
+      const signinReward = income.monthly[iDate.getDate()].split(' ');
       const rewardQuantity = signinReward[0];
       const rewardType = signinReward[1];
-      if (rewardType == "FURNITURE_PARTS") {
-        cumulativeFurnitureParts += parseInt(rewardQuantity);
+      if (rewardType === 'FURNITURE_PARTS') {
+        cumulativeFurnitureParts += parseInt(rewardQuantity, 10);
       }
     }
     if (skWeekdays.includes(iDay)) {
       farmingDates.push(new Date(iDate.valueOf()));
-      farmingDays++;
+      farmingDays += 1;
       i = skWeekdays.indexOf(iDay);
       if (i < skWeekdays.length - 1) {
-        i++;
+        i += 1;
       } else {
         i = 0;
       }
       farmingDatesCumulativeFurnitureParts.push(cumulativeFurnitureParts);
-    } else {
-      // Check if tomorrow is a farmable day and not the goal date
-      if (iDate.getDate() + 1 < localFurniturePartGoalDate.getDate()) {
-        let tomorrowDay = iDay + 1;
-        if (tomorrowDay == 7) {
-          tomorrowDay = 0;
-        }
-        if (skWeekdays.includes(tomorrowDay)) {
-          saveSanityDates.push(new Date(iDate.valueOf()));
-        }
+    } else if (iDate.getDate() + 1 < localFurniturePartGoalDate.getDate()) {
+      let tomorrowDay = iDay + 1;
+      if (tomorrowDay === 7) {
+        tomorrowDay = 0;
+      }
+      if (skWeekdays.includes(tomorrowDay)) {
+        saveSanityDates.push(new Date(iDate.valueOf()));
       }
     }
+    // Check if tomorrow is a farmable day and not the goal date
+
     iDate = new Date(iDate.setDate(iDate.getDate() + 1));
     iDay = iDate.getDay();
   }
 
-  const upperAvgSKRun = Math.ceil(remainingSKRuns / farmingDays);
+  // const upperAvgSKRun = Math.ceil(remainingSKRuns / farmingDays);
 
   const avgSKRun = parseFloat(skRuns / farmingDays).toFixed(2);
-  const avgSKSanity = avgSKRun * parseInt(skData.sanity);
+  const avgSKSanity = avgSKRun * parseInt(skData.sanity, 10);
   console.log(
-    "That's " +
-      farmingDays +
-      " farmable days with an average of " +
-      avgSKRun +
-      " SK-" +
-      data.optional.highestAutoSK +
-      " runs (" +
-      avgSKSanity +
-      " sanity) per farmable day."
+    `That's ${farmingDays} farmable days with an average of ${avgSKRun} SK-${data.optional.highestAutoSK} runs (${avgSKSanity} sanity) per farmable day.`,
   );
-  console.log("Farmable Dates: ");
-  for (let iFarm = 0; iFarm < farmingDates.length; iFarm++) {
+  console.log('Farmable Dates: ');
+  for (let iFarm = 0; iFarm < farmingDates.length; iFarm += 1) {
     console.log(
-      "   - " +
-        farmingDates[iFarm].toLocaleDateString("en-US", dateFormat) +
-        "; Cumulative Furniture Parts: " +
+      `   - ${farmingDates[iFarm].toLocaleDateString(
+        'en-US',
+        dateFormat,
+      )}; Cumulative Furniture Parts: ${
         farmingDatesCumulativeFurnitureParts[iFarm]
+      }`,
     );
   }
 
@@ -330,45 +303,41 @@ function scheduler(skRuns) {
     if (avgSKSanity >= 170) {
       const sanitRechargeStartTime = calculateCarryOverSanity();
       console.log(
-        "If short on sanity, carry over " +
-          sanityCap +
-          " sanity on the following non-farmable days to the next farmable day."
+        `If short on sanity, carry over ${sanityCap} sanity on the following non-farmable days to the next farmable day.`,
       );
       // start recharging sanity on which off days and what time:
-      console.log("Start recharging from 0 sanity at these times: ");
+      console.log('Start recharging from 0 sanity at these times: ');
       for (
         let iSaveSanity = 0;
         iSaveSanity < saveSanityDates.length;
-        iSaveSanity++
+        iSaveSanity += 1
       ) {
         // Credit for displaying hour and minutes: CJLopez & nrofis from https://stackoverflow.com/a/20430558
         console.log(
-          "   - " +
-            saveSanityDates[iSaveSanity].toLocaleDateString(
-              "en-US",
-              dateFormat
-            ) +
-            " at " +
-            sanitRechargeStartTime.toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })
+          `   - ${saveSanityDates[iSaveSanity].toLocaleDateString(
+            'en-US',
+            dateFormat,
+          )} at ${sanitRechargeStartTime.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })}`,
         );
       }
     }
   } else {
     console.log(
-      "You might be low on sanity. Please fill in the value for sanityCap in data.json if you wish to know when to start recharging on non-farmable days."
+      'You might be low on sanity. Please fill in the value for sanityCap in data.json if you wish to know when to start recharging on non-farmable days.',
     );
   }
 }
 
-function calculateCarryOverSanity() {
-  const sanityRechargeHours = Math.floor(sanityCap / 10);
-  const sanityRechargeMinutes = sanityCap - sanityRechargeHours * 10;
-  sanityRechargeTimeMilliseconds =
-    sanityRechargeHours * 1000 * 60 * 60 +
-    sanityRechargeMinutes * 1000 * 60 * 6;
+// Main
+// Calculates optimal number of runs on farming maps including calculations of
+// daily, weekly and monthly income
 
-  return new Date(localNextDayReset.getTime() - sanityRechargeTimeMilliseconds);
+calculateDaysAndWeeks();
+const furniturePartFarm = data.furniture.goalFurnitureParts - calculateIncome();
+if (furniturePartFarm >= 0) {
+  const skRuns = calculateNumOfRuns(furniturePartFarm);
+  scheduler(skRuns);
 }
