@@ -1,0 +1,29 @@
+{
+  "name": "arknights-currency-calculator",
+  "version": "1.0.0",
+  "description": "How to input values to use the Calculator.",
+  "main": "dateTest.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naiuhz/Arknights-Currency-Calculator.git"
+  },
+  "author": "Ian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/naiuhz/Arknights-Currency-Calculator/issues"
+  },
+  "homepage": "https://github.com/naiuhz/Arknights-Currency-Calculator#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.21.1",
+    "eslint-plugin-prettier": "^3.1.3",
+    "prettier": "^2.0.5"
+  }
+}
