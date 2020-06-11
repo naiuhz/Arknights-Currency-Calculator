@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const data = require('./data.json');
+const data = require('./json/data.json');
 
 const { sanityCap } = data.optional;
-const income = require('./currency_income.json');
-const constants = require('./constants.json');
+const income = require('./json/currency_income.json');
+const constants = require('./json/constants.json');
 
 const skData = constants.map[`SK-${data.optional.highestAutoSK}`];
 const timeFormat = {

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const data = require('./data.json');
+const data = require('./json/data.json');
 
 const timeFormat = {
   weekday: 'long',
