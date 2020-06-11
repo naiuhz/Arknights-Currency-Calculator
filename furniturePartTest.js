@@ -140,7 +140,7 @@ function calculateDaysAndWeeks() {
 }
 
 // calculateIncome
-// Calculates relevant daily, weekly and monthly signin rewards
+// Calculates relevant daily, weekly and monthly sign-in rewards
 function calculateIncome() {
   let monthlySignInFurniturePartIncome = 0;
   let monthlySignInFurniturePartCalculation = '';
@@ -167,7 +167,7 @@ function calculateIncome() {
     monthlySignInFurniturePartCalculation.length - 1,
   );
   console.log(
-    `Income calculation: ${income.daily.furnitureParts}*${timeDiffDays} (daily income) + ${income.weekly.furnitureParts}*${weeks} (weekly income) + ${monthlySignInFurniturePartCalculation} (monthly signin income)`,
+    `Income calculation: ${income.daily.furnitureParts}*${timeDiffDays} (daily income) + ${income.weekly.furnitureParts}*${weeks} (weekly income) + ${monthlySignInFurniturePartCalculation} (monthly sign-in income)`,
   );
   const totalFurniturePartIncome =
     income.daily.furnitureParts * timeDiffDays +
@@ -248,9 +248,9 @@ function scheduler(skRuns) {
     }
     cumulativeFurnitureParts += 72;
     if (iDate.getDate() in income.monthly) {
-      const signinReward = income.monthly[iDate.getDate()].split(' ');
-      const rewardQuantity = signinReward[0];
-      const rewardType = signinReward[1];
+      const signInReward = income.monthly[iDate.getDate()].split(' ');
+      const rewardQuantity = signInReward[0];
+      const rewardType = signInReward[1];
       if (rewardType === 'FURNITURE_PARTS') {
         cumulativeFurnitureParts += parseInt(rewardQuantity, 10);
       }
@@ -301,7 +301,7 @@ function scheduler(skRuns) {
 
   if (sanityCap) {
     if (avgSKSanity >= 170) {
-      const sanitRechargeStartTime = calculateCarryOverSanity();
+      const sanityRechargeStartTime = calculateCarryOverSanity();
       console.log(
         `If short on sanity, carry over ${sanityCap} sanity on the following non-farmable days to the next farmable day.`,
       );
@@ -317,7 +317,7 @@ function scheduler(skRuns) {
           `   - ${saveSanityDates[iSaveSanity].toLocaleDateString(
             'en-US',
             dateFormat,
-          )} at ${sanitRechargeStartTime.toLocaleTimeString([], {
+          )} at ${sanityRechargeStartTime.toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',
           })}`,
