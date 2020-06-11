@@ -177,6 +177,8 @@ function calculateIncome() {
     `Total furniture part income: ${totalFurniturePartIncome} furniture parts.`,
   );
 
+  // TODO: Add certificate store furniture parts
+
   return totalFurniturePartIncome - data.furniture.currentFurnitureParts;
 }
 
@@ -324,6 +326,11 @@ function scheduler(skRuns) {
         );
       }
     }
+    // TODO Add tasks to do today
+
+    // TODO Add level up sanity recharge notice
+
+    // TODO Earliest goal achievable date
   } else {
     console.log(
       'You might be low on sanity. Please fill in the value for sanityCap in data.json if you wish to know when to start recharging on non-farmable days.',
