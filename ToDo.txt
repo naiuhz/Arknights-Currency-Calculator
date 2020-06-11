@@ -1,9 +1,10 @@
 ToDo list: (Furniture Parts, LMD, EXP, SV)
 - Scheduler
-    - Need end of day milestones for farmable dates
+    - What to do today
 - Add certificate store furniture parts
 - Add level up sanity recharge notice
     - Level up after consuming how much sanity and on which day
+    - Suggest leveling up on a supply day
 
 Maybe list:
 - Earliest goal achievable date
@@ -16,4 +17,5 @@ Done:
 - Change printed goal to local time
 - Farm map on which days and number of times
 - Calculate non-farmable days and when to start recharging sanity to carry over
+- Need end of day milestones for farmable dates
 
