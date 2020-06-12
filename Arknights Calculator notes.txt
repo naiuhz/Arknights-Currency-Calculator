@@ -80,3 +80,9 @@ Conversion rates:
 - 1 blue record : 400 EXP
 - 1 yellow record : 1000 EXP
 - 1 gold record : 2000 EXP
+- 30 sanity: 360 EXP : 360 LMD
+
+ASAP Calculation:
+- Let y represent number of daily CE-5 runs
+- y = ( (LMD Goal - LMD Inv)/(EXP Goal - EXP Inv)*(Base EXP Income + 7500 * Math.floor(daily sanity consumption)/30)-Base LMD Income ) /
+( 7500 + ((LMD Goal - LMD Inv)/(EXP Goal - EXP Inv) * 7500) )
