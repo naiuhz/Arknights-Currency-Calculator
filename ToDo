@@ -15,6 +15,9 @@ Scheduler:
     ☐ Available if inventory is below goal, but inventory and income is above goal @est(2 hours)
     ☐ Missing goal date, calculate currency sequentially day by day @est(6 hours) 
     ☐ Requires sanity potions available @est(6 hours)
+  ASAP Calculator:
+    ☐ Add free login sanity potions start and end dates @est(1.5 hours)
+    ☐ LMD:EXP ratio for calculating CE-5:LS-5 runs ratio @est(1.5 hours)
 
 Maybe list:
   ☐ Possible bedtimes
