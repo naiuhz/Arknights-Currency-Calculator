@@ -18,7 +18,7 @@ Scheduler:
     ☐ Requires sanity potions available @est(6 hours)
       ☐ Sanity potions categorized by type and quantity
         ☐ eg. "Emergency Sanity Potion" : {[(5, "2020 June 22"), (1, "2020 June 15")]}
-
+  ☐ Change currency_income.json's monthly income into arrays or dictionaries
 
 Maybe list:
   ☐ Possible bedtimes
