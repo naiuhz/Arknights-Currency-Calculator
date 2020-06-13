@@ -6,6 +6,7 @@ ToDo list:
 
 Scheduler:
     ☐ What to do today @est(1.5 hours)
+      ☐ Add to ASAP calculator and consider local bed time
   Add certificate store furniture parts: 
     ☐ Need to calculate shop items left @est(2 hours)
   Add level up sanity recharge notice:
@@ -15,9 +16,9 @@ Scheduler:
     ☐ Available if inventory is below goal, but inventory and income is above goal @est(2 hours)
     ☐ Missing goal date, calculate currency sequentially day by day @est(6 hours) 
     ☐ Requires sanity potions available @est(6 hours)
-  ASAP Calculator:
-    ☐ Add free login sanity potions start and end dates @est(1.5 hours)
-    ☐ LMD:EXP ratio for calculating CE-5:LS-5 runs ratio @est(1.5 hours)
+      ☐ Sanity potions categorized by type and quantity
+        ☐ eg. "Emergency Sanity Potion" : {[(5, "2020 June 22"), (1, "2020 June 15")]}
+
 
 Maybe list:
   ☐ Possible bedtimes
@@ -28,4 +29,7 @@ Done:
   ✔ Farm map on which days and number of times @done(20-06-11 04:02)
   ✔ Calculate non-farmable days and when to start recharging sanity to carry over @done(20-06-11 04:02)
   ✔ Need end of day milestones for farmable dates @done(20-06-11 04:02)
+  ✔ ASAP Calculator: @done(20-06-13 02:33)
+  ✔ Add free login sanity potions start and end dates @est(1.5 hours) @done(20-06-13 02:33)
+  ✔ LMD:EXP ratio for calculating CE-5:LS-5 runs ratio @est(1.5 hours) @done(20-06-13 02:33)
 
