@@ -17,11 +17,15 @@ const dateFormat = {
 const lmdGoal = data.lmd.goalLMD;
 const lmdCurrent = data.lmd.currentLMD;
 const lmdBaseIncome = data.lmd.baseOutputLMD;
+const lmdDailyIncome = income.daily.lmd;
+const lmdWeeklyIncome = income.weekly.lmd;
 const ceLMDReward = constants.map['CE-5'].lmd;
 const ceSanityCost = constants.map['CE-5'].sanity;
 const expGoal = data.exp.goalOperatorEXP;
 const expCurrent = data.exp.currentInventoryEXP;
 const expBaseIncome = data.exp.baseOutputEXP;
+const expDailyIncome = income.daily.exp;
+const expWeeklyIncome = income.weekly.exp;
 const lsEXPReward = constants.map['LS-5'].battleRecordEXP;
 const sanityDaily = 240;
 const sanityDailyConsumption = data.optional.dailySanityConsumption;
@@ -65,18 +69,24 @@ if (!lmdGoal || !expGoal) {
     console.log('Error! Missing goalOperatorEXP value in data.json');
   }
 } else {
-  let day = 1;
+  let day = 0;
   let iDate = new Date();
   let iDateNumber = iDate.getDate();
   let lmdBaseIncomeHours = 0;
   let lmdBaseIncomeMinutes = 0;
   let expBaseIncomeHours = 0;
   let expBaseIncomeMinutes = 0;
+
+  // TODO: Calculate now until local bedtime for day 0
+  // Count number of available runs for day 0 with current sanity and recoverable sanity
+
   for (
     let cumulativeLMD = lmdCurrent, cumulativeEXP = expCurrent;
     cumulativeLMD < lmdGoal && cumulativeEXP < expGoal;
     day += 1
   ) {
+    iDate = new Date(iDate.setDate(iDate.getDate() + 1));
+    iDateNumber = iDate.getDate();
     console.log(`Day: ${day}`);
     const runs = calculateASAPRuns(cumulativeLMD, cumulativeEXP);
     let ceRuns = Math.round(runs[0]);
@@ -100,7 +110,6 @@ if (!lmdGoal || !expGoal) {
         )} minute(s).`,
       );
     }
-    cumulativeLMD += lmdBaseIncome;
     if (lsRuns > 0) {
       cumulativeEXP += lsRuns * lsEXPReward;
     } else {
@@ -112,7 +121,12 @@ if (!lmdGoal || !expGoal) {
         )} minute(s).`,
       );
     }
-    cumulativeEXP += expBaseIncome;
+    cumulativeLMD += lmdBaseIncome + lmdDailyIncome;
+    cumulativeEXP += expBaseIncome + expDailyIncome;
+    if (iDate.getDay() === 1) {
+      cumulativeLMD += lmdWeeklyIncome;
+      cumulativeEXP += expWeeklyIncome;
+    }
     console.log(`Date: ${iDate.toLocaleDateString('en-US', dateFormat)}`);
     if (iDateNumber in income.monthly) {
       const signInReward = income.monthly[iDateNumber].split(' ');
@@ -132,7 +146,5 @@ if (!lmdGoal || !expGoal) {
     console.log(`End of Day LMD: ${cumulativeLMD}/${lmdGoal}`);
     console.log(`End of Day EXP: ${cumulativeEXP}/${expGoal}`);
     console.log('----------------------------------');
-    iDate = new Date(iDate.setDate(iDate.getDate() + 1));
-    iDateNumber = iDate.getDate();
   }
 }
