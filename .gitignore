@@ -1,4 +1,5 @@
 node_modules/
 instructionsToDo
-json/data.json
-json/testData.json
+/json/data.json
+/json/testData.json
+*test*.json
