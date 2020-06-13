@@ -10,7 +10,7 @@
     "furnitureParts": 250
   },
   "monthly": {
-    "1": [2000, "LMD"],
+    "1": "2000 LMD",
     "2": "2000‬ EXP",
     "4": "8 SHOP_VOUCHERS",
     "5": "20 FURNITURE_PARTS",
