@@ -18,7 +18,9 @@ Scheduler:
     ☐ Requires sanity potions available @est(6 hours)
       ☐ Sanity potions categorized by type and quantity
         ☐ eg. "Emergency Sanity Potion" : {[(5, "2020 June 22"), (1, "2020 June 15")]}
+    ☐ What if you need to farm less than total runs?
   ☐ Change currency_income.json's monthly income into arrays or dictionaries
+  ☐ Error in calculateASAPRuns function if current currency is equal to goal
 
 Maybe list:
   ☐ Possible bedtimes
