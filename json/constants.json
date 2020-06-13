@@ -5,6 +5,16 @@
       "exp": 360,
       "lmd": 360,
       "furnitureParts": 46
+    },
+    "CE-5": {
+      "sanity": 30,
+      "exp": 360,
+      "lmd": 7500
+    },
+    "LS-5": {
+      "sanity": 30,
+      "exp": 360,
+      "battleRecordEXP": 7500
     }
   },
   "suppliesRotationWeekdays": {
