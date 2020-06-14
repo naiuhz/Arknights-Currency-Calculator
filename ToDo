@@ -21,6 +21,8 @@ Scheduler:
     ☐ What if you need to farm less than total runs?
   ☐ Change currency_income.json's monthly income into arrays or dictionaries
   ☐ Error in calculateASAPRuns function if current currency is equal to goal
+  ☐ If not all runs need to be expended within the day [(run rewards+base income)>goal]
+    ☐ Then try to calculate minimum runs needed and/or how long for base income to satisfy goal
 
 Maybe list:
   ☐ Possible bedtimes
