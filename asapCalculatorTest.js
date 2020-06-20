@@ -31,6 +31,9 @@ const expWeeklyIncome = income.weekly.exp;
 // const sanityDailyConsumption = data.optional.dailySanityConsumption;
 // const { currentSanity } = data.optional;
 // const { localBedTime } = data.optional;
+const universalGoalDate = data.optional.goalDate;
+const { lmdGoalDate } = data.lmd;
+const { expGoalDate } = data.exp;
 
 const currentTime = new Date();
 let localUTC;
@@ -185,12 +188,10 @@ if (
   }
 } else {
   console.log('ASAP calculator without farming runs:');
+  let lmdCumulative = lmdCurrent;
+  let expCumulative = expCurrent;
   for (
-    let iDay = 1,
-      lmdCumulative = lmdCurrent,
-      expCumulative = expCurrent,
-      iDate = localUTC,
-      iDateNumber = iDate.getDate();
+    let iDay = 1, iDate = localUTC, iDateNumber = iDate.getDate();
     lmdCumulative <= lmdGoal || expCumulative <= expGoal;
     iDay += 1,
       iDate = new Date(iDate.setDate(iDate.getDate() + 1)),
@@ -227,7 +228,15 @@ if (
     console.log(`End of Day LMD: ${lmdCumulative}/${lmdGoal}`);
     console.log(`End of Day EXP: ${expCumulative}/${expGoal}`);
     console.log('----------------------------------');
+    if (
+      (universalGoalDate && iDate < universalGoalDate) ||
+      (lmdGoalDate && iDate < lmdGoalDate && expGoalDate && iDate < expGoalDate)
+    ) {
+      console.log('Deadline reached.');
+      break;
+    }
   }
+  // TODO: Calculate number of CE-5 and LS-5 runs
 }
 
 /*
