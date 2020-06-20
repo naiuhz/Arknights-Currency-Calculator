@@ -4,7 +4,7 @@
 // Situations can change each day due to monthly sign-in rewards and rounding numbers of runs
 
 const data = require('./json/data.json');
-const constants = require('./json/constants.json');
+// const constants = require('./json/constants.json');
 const income = require('./json/currency_income.json');
 
 const dateFormat = {
@@ -19,18 +19,18 @@ const lmdCurrent = data.lmd.currentLMD;
 const lmdBaseIncome = data.lmd.baseOutputLMD;
 const lmdDailyIncome = income.daily.lmd;
 const lmdWeeklyIncome = income.weekly.lmd;
-const ceLMDReward = constants.map['CE-5'].lmd;
-const ceSanityCost = constants.map['CE-5'].sanity;
+// const ceLMDReward = constants.map['CE-5'].lmd;
+// const ceSanityCost = constants.map['CE-5'].sanity;
 const expGoal = data.exp.goalOperatorEXP;
 const expCurrent = data.exp.currentInventoryEXP;
 const expBaseIncome = data.exp.baseOutputEXP;
 const expDailyIncome = income.daily.exp;
 const expWeeklyIncome = income.weekly.exp;
-const lsEXPReward = constants.map['LS-5'].battleRecordEXP;
-const sanityDaily = 240;
-const sanityDailyConsumption = data.optional.dailySanityConsumption;
-const { currentSanity } = data.optional;
-const { localBedTime } = data.optional;
+// const lsEXPReward = constants.map['LS-5'].battleRecordEXP;
+// const sanityDaily = 240;
+// const sanityDailyConsumption = data.optional.dailySanityConsumption;
+// const { currentSanity } = data.optional;
+// const { localBedTime } = data.optional;
 
 const currentTime = new Date();
 let localUTC;
@@ -52,7 +52,7 @@ if (data.optional.timezoneCity) {
   );
 }
 
-function getBedTime(givenDate) {
+/* function getBedTime(givenDate) {
   const bedTime = data.optional.localBedTime;
   let bedTimeHour = 0;
   let bedTimeMinute = 0;
@@ -116,9 +116,9 @@ function getBedTime(givenDate) {
     bedTimeMinute,
     0,
   );
-}
+} */
 
-function calculateASAPRuns(cumulativeLMD, cumulativeEXP) {
+/* function calculateASAPRuns(cumulativeLMD, cumulativeEXP) {
   // Let y represent CE-5 runs
   let y = 0;
   let z = 0;
@@ -147,8 +147,90 @@ function calculateASAPRuns(cumulativeLMD, cumulativeEXP) {
   // console.log('y: ' + y);
   // console.log('z: ' + z);
   return [y, z];
+} */
+
+// -------------------------------------------------
+
+// ASAP without runs
+// Given:
+// - Base income LMD
+// - Base income EXP
+// - Goal LMD
+// - Goal EXP
+// - Goal date {optional}
+
+// Output:
+// - LMD and EXP days
+// 	- if given goal date:
+// 	- goal without farming achievable?
+//	- CE-5 and LS-5 runs required {consider LS-5's 360 LMD reward, thus count LS-5 runs first!}
+//	- days of sanity recharged including today (with and without annihilation Sundays)
+//	- additional sanity required from potions
+//	- ASAP date with all potions consumed
+
+if (
+  lmdGoal === 0 ||
+  lmdBaseIncome === 0 ||
+  expGoal === 0 ||
+  expBaseIncome === 0
+) {
+  if (lmdGoal === 0) {
+    console.log('Error: Missing goalLMD value');
+  } else if (lmdBaseIncome === 0) {
+    console.log('Error: Missing baseOutputLMD value');
+  } else if (expGoal === 0) {
+    console.log('Error: Missing goalOperatorEXP value');
+  } else if (expBaseIncome === 0) {
+    console.log('Error: Missing baseOutputEXP value');
+  }
+} else {
+  console.log('ASAP calculator without farming runs:');
+  for (
+    let iDay = 1,
+      lmdCumulative = lmdCurrent,
+      expCumulative = expCurrent,
+      iDate = localUTC,
+      iDateNumber = iDate.getDate();
+    lmdCumulative <= lmdGoal || expCumulative <= expGoal;
+    iDay += 1,
+      iDate = new Date(iDate.setDate(iDate.getDate() + 1)),
+      iDateNumber = iDate.getDate()
+  ) {
+    // Daily incomes
+    lmdCumulative += lmdBaseIncome + lmdDailyIncome;
+    expCumulative += expBaseIncome + expDailyIncome;
+
+    // Weekly incomes
+    if (iDate.getDay() === 1) {
+      lmdCumulative += lmdWeeklyIncome;
+      expCumulative += expWeeklyIncome;
+    }
+
+    // Monthly sign-in incomes
+    if (iDateNumber in income.monthly) {
+      const signInReward = income.monthly[iDateNumber].split(' ');
+      const rewardQuantity = signInReward[0];
+      const rewardType = signInReward[1];
+      if (rewardType === 'LMD') {
+        const amount = parseInt(rewardQuantity, 10);
+        console.log(`Monthly Sign-in reward: ${amount} LMD`);
+        lmdCumulative += amount;
+      } else if (rewardType === 'EXP') {
+        const amount = parseInt(rewardQuantity, 10);
+        console.log(`Monthly Sign-in reward: ${amount} EXP`);
+        expCumulative += amount;
+      }
+    }
+    console.log(
+      `Day ${iDay}: ${iDate.toLocaleDateString('en-US', dateFormat)}`,
+    );
+    console.log(`End of Day LMD: ${lmdCumulative}/${lmdGoal}`);
+    console.log(`End of Day EXP: ${expCumulative}/${expGoal}`);
+    console.log('----------------------------------');
+  }
 }
 
+/*
 // Main
 if (!lmdGoal || !expGoal) {
   if (!lmdGoal) {
@@ -301,4 +383,6 @@ if (!lmdGoal || !expGoal) {
     // TODO: Show calculations here.
     console.log('----------------------------------');
   }
+  console.log('----------------END---------------');
 }
+*/
