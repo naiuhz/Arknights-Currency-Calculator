@@ -6,7 +6,11 @@
 // let testFour = {};
 // let testFive = {};
 
+const currencyDaysCalculator = require('./currencyDaysCalculator');
+
 // Scenario 1 (Good Day/Happy Path)
+
+currencyDaysCalculator.function1();
 
 // Scenario 2
 
