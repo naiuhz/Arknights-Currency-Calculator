@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h3>
+      Client side IP geolocation using <a href="http://ipinfo.io">ipinfo.io</a>
+    </h3>
+
+    <hr />
+    <div id="ip"></div>
+    <div id="address"></div>
+    <hr />
+    Full response:
+    <pre id="details"></pre>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+      $.get(
+        'http://ipinfo.io',
+        function (response) {
+          $('#ip').html('IP: ' + response.ip);
+          $('#address').html(
+            'Location: ' + response.city + ', ' + response.region,
+          );
+          $('#details').html(JSON.stringify(response, null, 4));
+        },
+        'jsonp',
+      );
+    </script>
+  </body>
+</html>
