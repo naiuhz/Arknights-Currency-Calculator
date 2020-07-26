@@ -197,6 +197,13 @@ if (
       iDate = new Date(iDate.setDate(iDate.getDate() + 1)),
       iDateNumber = iDate.getDate()
   ) {
+    if (
+      (universalGoalDate && iDate < universalGoalDate) ||
+      (lmdGoalDate && iDate < lmdGoalDate && expGoalDate && iDate < expGoalDate)
+    ) {
+      console.log('Deadline reached.');
+      break;
+    }
     // Daily incomes
     lmdCumulative += lmdBaseIncome + lmdDailyIncome;
     expCumulative += expBaseIncome + expDailyIncome;
@@ -228,13 +235,6 @@ if (
     console.log(`End of Day LMD: ${lmdCumulative}/${lmdGoal}`);
     console.log(`End of Day EXP: ${expCumulative}/${expGoal}`);
     console.log('----------------------------------');
-    if (
-      (universalGoalDate && iDate < universalGoalDate) ||
-      (lmdGoalDate && iDate < lmdGoalDate && expGoalDate && iDate < expGoalDate)
-    ) {
-      console.log('Deadline reached.');
-      break;
-    }
   }
   // TODO: Calculate number of CE-5 and LS-5 runs
 }
