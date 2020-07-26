@@ -9,23 +9,45 @@ const dateFormat = {
   day: 'numeric',
 };
 
+const lmdDailyIncome = income.daily.lmd;
+const lmdWeeklyIncome = income.weekly.lmd;
+const expDailyIncome = income.daily.exp;
+const expWeeklyIncome = income.weekly.exp;
+
 function function1() {
   console.log('Hello! This is function1!');
 }
 
 function calculateCurrencyDays(input) {
   console.log('ASAP calculator without farming runs:');
-  let lmdCumulative = input.lmdCurrent;
-  let expCumulative = input.expCurrent;
+  const output = {
+    lmdCumulative: input.lmdCurrent,
+    expCumulative: input.expCurrent,
+    ceRuns: 0,
+    lsRuns: 0,
+    currentSanity: input.currentSanity,
+    monthlyCardDaysLeft: input.monthlyCardDaysLeft,
+    sanityConsumable: input.sanityConsumable,
+  };
+  const { goalDate } = input.goalDate;
+  console.log(`input.lmdCurrent: ${input.lmdCurrent}`);
+  console.log(`output.lmdCurrent: ${output.lmdCumulative}`);
+  /* if (input.goalDate != null) {
+    lmdGoal = input.goalDate;
+    expGoal = input.goalDate;
+  } */
+
+  // No additional sanity used
   for (
     let iDay = 1, iDate = input.localUTC, iDateNumber = iDate.getDate();
-    lmdCumulative <= input.lmdGoal || expCumulative <= input.expGoal;
+    output.lmdCumulative <= input.lmdGoal ||
+    output.expCumulative <= input.expGoal;
     iDay += 1,
       iDate = new Date(iDate.setDate(iDate.getDate() + 1)),
       iDateNumber = iDate.getDate()
   ) {
     if (
-      (input.universalGoalDate && iDate < input.universalGoalDate) ||
+      (goalDate && iDate < input.universalGoalDate) ||
       (input.lmdGoalDate &&
         iDate < input.lmdGoalDate &&
         input.expGoalDate &&
@@ -35,13 +57,14 @@ function calculateCurrencyDays(input) {
       break;
     }
     // Daily incomes
-    lmdCumulative += input.lmdBaseIncome + input.lmdDailyIncome;
-    expCumulative += input.expBaseIncome + input.expDailyIncome;
+
+    output.lmdCumulative += input.lmdBaseIncome + lmdDailyIncome;
+    output.expCumulative += input.expBaseIncome + expDailyIncome;
 
     // Weekly incomes
     if (iDate.getDay() === 1) {
-      lmdCumulative += input.lmdWeeklyIncome;
-      expCumulative += input.expWeeklyIncome;
+      output.lmdCumulative += lmdWeeklyIncome;
+      output.expCumulative += expWeeklyIncome;
     }
 
     // Monthly sign-in incomes
@@ -52,21 +75,30 @@ function calculateCurrencyDays(input) {
       if (rewardType === 'LMD') {
         const amount = parseInt(rewardQuantity, 10);
         console.log(`Monthly Sign-in reward: ${amount} LMD`);
-        lmdCumulative += amount;
+        output.lmdCumulative += amount;
       } else if (rewardType === 'EXP') {
         const amount = parseInt(rewardQuantity, 10);
         console.log(`Monthly Sign-in reward: ${amount} EXP`);
-        expCumulative += amount;
+        output.expCumulative += amount;
       }
     }
     console.log(
       `Day ${iDay}: ${iDate.toLocaleDateString('en-US', dateFormat)}`,
     );
-    console.log(`End of Day LMD: ${lmdCumulative}/${input.lmdGoal}`);
-    console.log(`End of Day EXP: ${expCumulative}/${input.expGoal}`);
+    console.log(`End of Day LMD: ${output.lmdCumulative}/${input.lmdGoal}`);
+    console.log(`End of Day EXP: ${output.expCumulative}/${input.expGoal}`);
     console.log('----------------------------------');
   }
+
+  // No farming necessary
+  if (
+    output.lmdCumulative >= input.lmdGoal &&
+    output.expCumulative >= input.expCumulative
+  ) {
+    return output;
+  }
   // TODO: Calculate number of CE-5 and LS-5 runs
+  return output;
 }
 
 module.exports = {
