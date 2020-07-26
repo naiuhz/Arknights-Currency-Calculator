@@ -4,6 +4,13 @@ ToDo list:
   ☐ EXP
   ☐ SV
 
+SanityCarryOver:
+  ☐ Use dateTest.js to create a simplified script:
+    ☐ calculate when to start saving sanity
+    ☐ how much sanity to consume
+    ☐ when to wake up
+    ☐ optional bedtime and wakeup hours
+
 Scheduler:
     ☐ What to do today @est(1.5 hours)
       ☐ Add to ASAP calculator and consider local bed time
@@ -23,6 +30,7 @@ Scheduler:
   ☐ Error in calculateASAPRuns function if current currency is equal to goal
   ☐ If not all runs need to be expended within the day [(run rewards+base income)>goal]
     ☐ Then try to calculate minimum runs needed and/or how long for base income to satisfy goal
+  ☐ Suggest base setups (153 vs 243)
 
 Maybe list:
   ☐ Possible bedtimes
